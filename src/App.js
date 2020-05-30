@@ -11,8 +11,16 @@ function App() {
         </ul>
       </div>
 
-      <div className="content">
-        Hello, World!
+      <div className="dropdwon">
+        <select name="Team">
+          <option value='1'>전북 현대 모터스</option>
+          <option value='2'>울산 현대 호랑이</option>
+        </select>
+        
+        <select name="Player">
+          <option value='1'>멋장이 김민준</option>
+          <option value='2'>미래의 주커버그</option>
+        </select>
       </div>
     </div>
   );
