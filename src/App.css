@@ -10,27 +10,45 @@ body{
     display: flex;
 }
 .sidebar{
-    width: 200px;
-    padding: 17px 10px 0;
+    width: 12%;
+    padding: 12px 10px 0;
     background: black;
     color: lightgray;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.content{
-    padding: 10px 10px 0;
+.contentblock{
+    width: 88%;
+    background-image: url('background.jpg');
+    background-size: contain;
+    align-items: center;
 }
 .dropdown{
     position: relative;
     display: inline-block;
     padding: 10px
-    
 }
 select{
     width: 200px;
     padding: .8em .5em;
+    margin: 10px;
     font-family:  inherit;
     border: 1px solid #999;
     border-radius: 5px;
+    position: relative;
+    left: 30px;
+    top: 10px;
+}
+.sketch{
+    margin: 1%;
+    background: darkgrey;
+    height: 60%;
+    border-radius: 12mm;
+}
+.textbox{
+    margin: 1%;
+    padding: .8em .5em; 
+    background-color: #36454f;
+    color: lightgray;
 }
