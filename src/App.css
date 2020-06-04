@@ -12,8 +12,8 @@ body{
 .sidebar{
     width: 12%;
     padding: 12px 10px 0;
-    background: black;
-    color: lightgray;
+    background: darkgrey;
+    color: beige;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,13 +42,13 @@ select{
 }
 .sketch{
     margin: 1%;
-    background: darkgrey;
+    background: black;
     height: 60%;
     border-radius: 12mm;
 }
 .textbox{
     margin: 1%;
     padding: .8em .5em; 
-    background-color: #36454f;
+    background-color: #1f2327;
     color: lightgray;
 }
