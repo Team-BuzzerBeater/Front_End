@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Drops from './dropdown';
 import Sidebar from './sidebar';
-import Writer from './writer';
+import Sketch from './sketch';
 
 class App extends Component {
   
@@ -12,7 +12,7 @@ class App extends Component {
         <Sidebar />
         <div className='contentblock'>
           <Drops name = "drops" />
-          <Writer/>
+          <Sketch name = "sketch" />
           <div className="textbox" />
         </div>
       </div>

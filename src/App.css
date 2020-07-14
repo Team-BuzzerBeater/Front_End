@@ -31,7 +31,7 @@ body{
 }
 select{
     background: #123349;
-    color: #45F59A;
+    color: aquamarine;
     width: 320px;
     height: 60px;  
     padding: .8em .5em;
@@ -51,9 +51,28 @@ select{
     border-radius: 12mm;
 }
 .textbox{
+    margin: 0.5%;
     border: .7px black;
     padding: .8em .5em;
     background-color: #123349;
     color: aquamarine;
     height: 20%;
+}
+.wnotation{
+    background: #123349;
+    color: aquamarine;
+    padding: .8em .5em;
+    margin: 10px 15px;
+    border: 1px solid aqua;
+    flex-direction: row;
+}
+.writebox{
+    background: #123349;
+    color: aquamarine;
+    padding: .8em .5em;
+    margin: 10px 15px;
+    border: 1px solid aqua;
+    width: 10%;
+    height: 6%;
+    position: flex;
 }

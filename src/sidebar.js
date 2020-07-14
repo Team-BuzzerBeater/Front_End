@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, createElement} from 'react';
 import './App.css';
 
 class Sidebar extends Component{
-  
   render(){
     return (
       <div className="sidebar">
@@ -14,5 +13,6 @@ class Sidebar extends Component{
     )
   }
 }
+
 
 export default Sidebar;

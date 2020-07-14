@@ -1,34 +1,86 @@
 import React, {Component} from 'react';
 import './App.css';
+import axios from 'axios';
 class Drops extends Component{
-    state = {
-        teams : ['전북 현대 모터스', '울산 현대 호랑이', '포항 스틸러스'],
-        players: [['Please select player'],['이동국','이승기','조규성'],['주니오','김보경','김인성'],['일류첸코','팔로세비치']]
-    }      
+    constructor(props){
+        super(props);
+        this.state = {
+            statusCode: 0,
+            teamData: ['fail'],
+            playerData: ['fail'],
+            selectTeam: 0,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+    
+    loadingData = async () => {
+        try {
+            const responseTeam = await axios.get(
+                'http://52.78.146.228:3000/printXg/teamList'
+            );
+            const responsePlayer = await axios.get(
+                'http://52.78.146.228:3000/printXg/playerList'
+            );
+            this.setState({
+                ...this.state,
+                statusCode: responseTeam.data.statusCode,
+                teamData: responseTeam.data.data,
+            });
+            console.log(responseTeam.data.statusCode);
+            this.setState({
+                ...this.state,
+                statusCode: responsePlayer.data.statusCode,
+                playerData: responsePlayer.data.data,
+            });
+            console.log(responseTeam.data.data);
+            console.log(responsePlayer.data.statusCode);
+            console.log(responsePlayer.data.data);
+        } catch(e){
+            console.log(e);
+        }
+    };
+
+    componentDidMount(){
+        const { loadingData } = this;
+        loadingData();
+    }
+
+    handleChange(event){
+        this.setState({
+            ...this.state,
+            selectTeam: event.target.value,
+        });
+        console.log(event.target.value);
+    }
+          
     render(){
-        const { teams }  = this.state;
-        const teamlist = teams.map(
-            (team, i) => (
-                <option value={i + 1}>{team}</option>
+        
+        const { teamData } = this.state;
+        const teamlist = teamData.map(
+            (team) => (
+                <option value = {team["teamIdx"]}>{team["teamName"]}</option>
             )
         );
-        const { players } = this.state;
-        const playerlist = players[0].map(
-            (player, i) => (
-                <option value ={i}>{player}</option>
+        const { playerData } = this.state;
+        
+        let playerlist = playerData.map(
+            (player) => (
+                <option>{player["playerName"]}</option>
             )
-        );
+        )
         return (
-            <div className="dropdown">
-                <select name="Team">
-                    <option value= '0' selected>Please select team</option>
+            <form className="dropdown">
+                <select name="Team" value={this.state.value} onChange={this.handleChange}>
+                    <option defaultValue= '100'>Please select team</option>
                     {teamlist}
                 </select>
             
                 <select name="Player">
+                    <option value= '0'>Please select player</option>
                     {playerlist}
                 </select>
-            </div>
+            </form>
         );
     }
 }
