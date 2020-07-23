@@ -1,10 +1,10 @@
-import React, {Component, createElement} from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-class Sidebar extends Component{
+class Textbar extends Component{
   render(){
     return (
-      <div className="sidebar">
+      <div className="textbar">
         <ul>
           <li>page 1</li>
           <li>page 2</li>
@@ -14,5 +14,4 @@ class Sidebar extends Component{
   }
 }
 
-
-export default Sidebar;
+export default Textbar;

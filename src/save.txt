@@ -1,0 +1,52 @@
+import React, {Component} from 'react';
+import './App.css';
+import Drops from './dropdown';
+import Sidebar from './sidebar';
+import Sketch from './sketch';
+
+class App extends Component {
+  
+  render(){
+    return (
+      <div className="app">
+        <Sidebar />
+        <div className='contentblock'>
+          <Drops name = "drops" />
+          <Sketch name = "sketch" />
+          <div className="textbox" />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+select{
+    background: #123349;
+    color: aquamarine;
+    padding: .8em .5em;
+    margin: 0 10px;
+    width: 320px;
+    height: 60px;  
+    border: 1px solid aqua;
+    font-family: inherit;
+    font-size: 20px;
+    position: relative;
+    left: 30px;
+    top: 10px;
+}
+.textbox2{
+    padding: 6px 6px 0;
+    background: #123349;
+    color: aquamarine;
+    border: .7px black;
+    flex-direction: column;
+    font-size: 20px;
+    height: 20vh;
+}
+        <div className="right">
+          <div className="profile" />
+          <div className="opposite" />
+          <div className="homeaway" />
+        </div>
