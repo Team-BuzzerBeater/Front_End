@@ -17,11 +17,12 @@ class Drops extends Component{
     loadingData = async () => {
         try {
             const responseTeam = await axios.get(
-                'http://52.78.146.228:3000/printXg/teamList'
+                'http://52.78.191.139:3000/printXg/teamList'
             );
             const responsePlayer = await axios.get(
-                'http://52.78.146.228:3000/printXg/playerList'
+                'http://52.78.191.139:3000/printXg/playerList'
             );
+            console.log(responseTeam.data);
             this.setState({
                 ...this.state,
                 statusCode: responseTeam.data.statusCode,
@@ -33,7 +34,6 @@ class Drops extends Component{
                 statusCode: responsePlayer.data.statusCode,
                 playerData: responsePlayer.data.data,
             });
-            console.log(responseTeam.data.data);
             console.log(responsePlayer.data.statusCode);
             console.log(responsePlayer.data.data);
         } catch(e){
@@ -55,18 +55,19 @@ class Drops extends Component{
     }
           
     render(){
-        
-        const { teamData } = this.state;
+        const { selectTeam, teamData, playerData } = this.state;
         const teamlist = teamData.map(
             (team) => (
                 <option value = {team["teamIdx"]}>{team["teamName"]}</option>
             )
-        );
-        const { playerData } = this.state;
-        
-        let playerlist = playerData.map(
+        )
+        const playerlist = playerData.filter(
             (player) => (
-                <option>{player["playerName"]}</option>
+                player.teamIdx == selectTeam
+            )
+        ).map(
+            (player) => (
+                <option value= {player["playerIdx"]}>{player["playerName"]}</option>
             )
         )
         return (
