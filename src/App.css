@@ -6,17 +6,7 @@ body{
     sans-serif;
 }
 .app{
-    display: flex;
-    background-image: url('background.jpg');
     background-size: contain;
-}
-.left{
-    height:100vh;
-    width:60vw;
-}
-.right{
-    height:100vh;
-    width:40vw;
 }
 .dropdown{
     height:10%;
@@ -51,22 +41,4 @@ select{
     padding: .8em .5em;
     background-color: #123349;
     color: aquamarine;
-}
-.profile{
-    margin: 4%;
-    height: 25%;
-    background-color: #123349;
-    border: 1% solid aqua;
-}
-.opposite{
-    margin: 4%;
-    height: 35%;
-    background-color: #123349;
-    border: 1% solid aqua;
-}
-.homeaway{
-    margin: 4%;
-    height: 25%;
-    background-color: #123349;
-    border: 1% solid aqua;
 }

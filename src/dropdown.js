@@ -73,7 +73,7 @@ class Drops extends Component{
         return (
             <form className="dropdown">
                 <select name="Team" value={this.state.value} onChange={this.handleChange}>
-                    <option defaultValue= '100'>Please select team</option>
+                    <option defaultValue= '0'>Please select team</option>
                     {teamlist}
                 </select>
             

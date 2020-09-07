@@ -50,3 +50,17 @@ select{
           <div className="opposite" />
           <div className="homeaway" />
         </div>
+    background-image: url('background.jpg');
+
+    let chart = am4core.create("chartdiv", am4charts.XYChart);
+  
+      // Create series
+      var lineSeries = chart.series.push(new am4charts.LineSeries());
+      lineSeries.dataFields.valueY = "point";
+      lineSeries.dataFields.valueX = "round";
+      lineSeries.strokeOpacity = 0;
+  round = 0;
+        for(let j = 0; j< 5;j++){
+          round += Math.random() * Math.random();
+        }
+        total += round;
