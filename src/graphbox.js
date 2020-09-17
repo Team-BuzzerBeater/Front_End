@@ -14,7 +14,7 @@ class GraphBox extends Component {
 
     render(){
         return (
-            <form className="graph type">
+            <form>
                 <select name="Graph" onChange={this.handleChange}>
                 <option value= '0'>positional Graph</option>
                 <option value= '1'>round Graph</option>

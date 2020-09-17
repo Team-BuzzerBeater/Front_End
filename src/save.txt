@@ -64,3 +64,9 @@ select{
           round += Math.random() * Math.random();
         }
         total += round;
+        
+            goalData: response.data.data.filter(
+              (shot) => (
+                shot.result == 1
+              )
+            ),

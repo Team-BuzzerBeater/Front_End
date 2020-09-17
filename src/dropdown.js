@@ -5,9 +5,19 @@ class Drops extends Component{
     constructor(props){
         super(props);
         this.state = {
-            statusCode: 0,
-            teamData: ['fail'],
-            playerData: ['fail'],
+            teamData: [{
+                "teamIdx" : 0,
+                "teamName" : "Hello world",
+            }],
+            playerData: [{
+                "teamIdx" : 0,
+                "playerIdx": 1,
+                "playerName" : "Hello",
+            },{
+                "teamIdx" : 0,
+                "playerIdx": 2,
+                "playerName" : "World",
+            }],
             selectTeam: 0,
         };
 
@@ -22,20 +32,16 @@ class Drops extends Component{
             const responsePlayer = await axios.get(
                 'http://52.78.191.139:3000/printXg/playerList'
             );
-            console.log(responseTeam.data);
+            console.log(responseTeam.data.statusCode);
             this.setState({
                 ...this.state,
-                statusCode: responseTeam.data.statusCode,
                 teamData: responseTeam.data.data,
             });
             console.log(responseTeam.data.statusCode);
             this.setState({
                 ...this.state,
-                statusCode: responsePlayer.data.statusCode,
                 playerData: responsePlayer.data.data,
             });
-            console.log(responsePlayer.data.statusCode);
-            console.log(responsePlayer.data.data);
         } catch(e){
             console.log(e);
         }
@@ -47,11 +53,15 @@ class Drops extends Component{
     }
 
     handleChange(event){
-        this.setState({
-            ...this.state,
-            selectTeam: event.target.value,
-        });
-        console.log(event.target.value);
+        if (event.target.name == "Team"){
+            this.setState({
+                ...this.state,
+                selectTeam: event.target.value,
+            });
+        }
+        else {
+            this.props.onChange(event.target);
+        }
     }
           
     render(){
@@ -71,15 +81,22 @@ class Drops extends Component{
             )
         )
         return (
-            <form className="dropdown">
+            <form>
                 <select name="Team" value={this.state.value} onChange={this.handleChange}>
-                    <option defaultValue= '0'>Please select team</option>
+                    <option defaultValue= '0'>Please Select Team</option>
                     {teamlist}
                 </select>
             
-                <select name="Player">
-                    <option value= '0'>Please select player</option>
+                <select name="Player" value={this.state.value} onChange={this.handleChange}>
+                    <option value= '0'>Please Select Player</option>
                     {playerlist}
+                </select>
+
+                <select name="Graph" value={this.state.value} onChange={this.handleChange}>
+                    <option value= '0'>Position Graph</option>
+                    <option value= '1'>Round Graph</option>
+                    <option value= '2'>Against Graph</option>
+                    <option value= '3'>Profile</option>
                 </select>
             </form>
         );

@@ -6,7 +6,7 @@ body{
     sans-serif;
 }
 .app{
-    background-size: contain;
+    background-color: #010326;
 }
 .dropdown{
     height:10%;
@@ -16,14 +16,15 @@ body{
     padding: 10px auto;
 }
 select{
-    background: #123349;
-    color: aquamarine;
+    background: #143959;
+    color: #F2C063;
     padding: .8em .5em;
-    margin: 0 10px;
-    border: 1px solid aqua;
+    margin: 0 1%;
+    border: 1px solid #A68053;
     font-family: inherit;
     font-size: 20px;
-    width: 40%;
+    font-weight: 500;
+    width: 30%;
     position: relative;
     left: 30px;
     top: 10px;
