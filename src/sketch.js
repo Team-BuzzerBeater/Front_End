@@ -103,7 +103,7 @@ class Sketch extends Component{
         normalize.push({
           positionX : shot.positionX * 0.68,
           positionY : Math.min(shot.positionY, 100-shot.positionY),
-          xG : 15 + shot.xG * 10,
+          xG : 10 + shot.xG * 32,
           result : shot.result,
       })
       )
@@ -215,12 +215,22 @@ class Sketch extends Component{
     var gBullet = lineSeries.bullets.push(new am4charts.LabelBullet());
     gBullet.label.text = "[bold font-size: 22px]골";
 
+    let scrollbarX = new am4charts.XYChartScrollbar();
+    scrollbarX.series.push(lineSeries);
+    chart.scrollbarX = scrollbarX;
+    
+    let scrollbarY = new am4charts.XYChartScrollbar();
+    scrollbarY.series.push(lineSeries);
+    chart.scrollbarY = scrollbarY;
+    
+    //chart.legend = new am4charts.Legend();
+
     this.chart = chart;
   }
 
   render(){
     return (
-      <div id={"graph"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"20px", width: "70vw", height: "55vw"}}/>
+      <div id={"graph"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"20px", height: "40rem"}}/>
     )
   }
 }

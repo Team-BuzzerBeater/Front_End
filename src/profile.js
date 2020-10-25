@@ -66,7 +66,7 @@ class Profile extends Component{
         console.log(teamIdx)
         console.log(playerTeam)
         return (
-            <div id={"profile"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"20px", width: "70vw", height: "100%"}}>
+            <div id={"profile"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"2%", height: "87%"}}>
                 <h1 style={{color: "white"}}>{this.state.data[0].playerName}</h1>
                 <p style={{color: "white"}}>지난 시즌 득점 기록:{this.state.data[0].goals}</p>
                 <p style={{color: "white"}}>키:{this.state.data[0].height}</p>

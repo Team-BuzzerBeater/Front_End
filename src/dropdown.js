@@ -93,10 +93,10 @@ class Drops extends Component{
                 </select>
 
                 <select name="Graph" value={this.state.value} onChange={this.handleChange}>
-                    <option value= '0'>Position Graph</option>
-                    <option value= '1'>Round Graph</option>
-                    <option value= '2'>Against Graph</option>
-                    <option value= '3'>Profile</option>
+                    <option value= '0'>Profile</option>
+                    <option value= '1'>Position Graph</option>
+                    <option value= '2'>Round Graph</option>
+                    <option value= '3'>Against Graph</option>
                 </select>
             </form>
         );

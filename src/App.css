@@ -11,10 +11,8 @@ body{
 }
 .dropdown{
     height:10%;
-    width:100%;
     position: relative;
     display: inline-block;
-    padding: 10px auto;
 }
 select{
     background: #143959;
@@ -29,18 +27,4 @@ select{
     position: relative;
     left: 30px;
     top: 10px;
-}
-.sketch{
-    height: 50%;
-    margin: 1%;
-    background: #123349;
-    border: 8px solid aqua;
-    border-radius: 12mm;
-}
-.textbar{
-    height: 30%;
-    margin: 0.5%;
-    padding: .8em .5em;
-    background-color: #123349;
-    color: aquamarine;
 }

@@ -34,6 +34,7 @@ class Textbar extends Component{
     chart.paddingRight = 20;
     chart.background.setFill("white");
 
+    
     let data = [];
     let round = 0, total = 0;
     for (let i = 1; i <= 38; i++){
@@ -42,8 +43,14 @@ class Textbar extends Component{
       data.push({round: i, value: round, total: total, result: Math.random()<0.3?Math.random()<0.09?2:1:0});
     }
     
-    let arrValue = new Map();
-    let arrResult = new Map();
+    let shootdata  = this.props.data.filter(
+      (shots)=>(
+        shots.shootIdx >33789
+      )
+    ); // 33789는 DB의 2019 마지막 데이터 shootidx
+/*
+    let arrValue = {};
+    let arrResult = {};
     for (let item in data){
       if(arrValue.has(data[item].round)){
         arrValue.set(data[item].round, data[item].value+arrValue.get(data[item].round));
@@ -54,6 +61,8 @@ class Textbar extends Component{
         arrResult.set(data[item].round, data[item].result);
       }
     }
+    console.log(arrValue);
+    console.log(arrResult);
     let art = [];
     for (let i in arrValue.keys()){
       art.push({
@@ -62,8 +71,9 @@ class Textbar extends Component{
         'round': arrResult[i],
       })
     }
+    console.log(art);
+    */
     chart.data = data;
-
 
     // Create axes
     var categoryAxisX = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -85,31 +95,36 @@ class Textbar extends Component{
     lineSeries.dataFields.valueY = "total";
     lineSeries.dataFields.categoryX = "round";
     lineSeries.strokeWidth = 5;
-    lineSeries.stroke = am4core.color("#143959");
+    lineSeries.stroke = am4core.color("#143959"); // 누적
     lineSeries.yAxis = valueAxisY2;
+    lineSeries.name = "누적 기대득점";
     
 
     var lineSeries2 = chart.series.push(new am4charts.ColumnSeries());
     lineSeries2.dataFields.valueY = "value";
     lineSeries2.dataFields.categoryX = "round";
+    lineSeries2.fill = am4core.color("#2B678C"); // 라운드별
+    lineSeries2.name = "라운드별 기대득점";
 
     var lineSeries3 = chart.series.push(new am4charts.LineSeries());
     lineSeries3.dataFields.valueY = "result";
     lineSeries3.dataFields.categoryX = "round";
-    lineSeries3.stroke = am4core.color("orange");
+    lineSeries3.stroke = am4core.color("orange"); //득점 라인
     lineSeries3.strokeWidth = 3;
     lineSeries3.strokeOpacity = 1;
     lineSeries3.data = chart.data;
+    lineSeries3.name = "라운드별 득점";
 
     
     var gBullet = lineSeries3.bullets.push(new am4charts.CircleBullet());
-    gBullet.circle.fill = am4core.color("orange");
+    gBullet.circle.fill = am4core.color("orange"); // 득점 
     gBullet.circle.radius = 5;
-    gBullet.circle.stroke = am4core.color("brown");
-    gBullet.circle.strokeWidth = 1
+    gBullet.circle.stroke = am4core.color("#73523F"); // 득점 테두리
+    gBullet.circle.strokeWidth = 2;
     gBullet.circle.opacity = 1;
-    gBullet.circle.strokeOpacity = 0;
     
+    chart.legend = new am4charts.Legend();
+
     this.chart = chart;
   }
   render(){

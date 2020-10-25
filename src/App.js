@@ -57,6 +57,7 @@ class App extends Component {
           Player: idx,
           data: response.data.data,
         });
+        console.log(response.data.data);
       }
     } catch(e){
         console.log(e);
@@ -67,16 +68,16 @@ class App extends Component {
     let graphs = null;
     let {Graph} = this.state;
     if (Graph == 0){
-      graphs = <Sketch playerIdx = {this.state.Player} data = {this.state.data}/>
+      graphs = <Profile playerIdx = {this.state.Player}/>
     }
     else if (Graph == 1){
-      graphs = <Textbar playerIdx = {this.state.Player} data = {this.state.data}/>
+      graphs = <Sketch playerIdx = {this.state.Player} data = {this.state.data}/>
     }
     else if (Graph == 2){
-      graphs = <Versus playerIdx = {this.state.Player} data = {this.state.data}/>
+      graphs = <Textbar playerIdx = {this.state.Player} data = {this.state.data}/>
     }
     else if (Graph == 3){
-      graphs = <Profile playerIdx = {this.state.Player}/>
+      graphs = <Versus playerIdx = {this.state.Player} data = {this.state.data}/>
     }
     return (
       <div className="app">
