@@ -30,7 +30,7 @@ class Textbar extends Component{
     const { playerIdx } = this.props;
     am4core.useTheme(am4themes_animated);
     let chart = am4core.create("chart"+playerIdx,am4charts.XYChart);
-
+    console.log(this.props.data);
     chart.paddingRight = 20;
     chart.background.setFill("white");
 
@@ -39,9 +39,31 @@ class Textbar extends Component{
     for (let i = 1; i <= 38; i++){
       round = Math.pow(Math.random(),3) +Math.pow(Math.random(),3)+Math.pow(Math.random(),3)+Math.pow(Math.random(),3);
       total += round;
-      data.push({round: i, value: round, total: total});
+      data.push({round: i, value: round, total: total, result: Math.random()<0.3?Math.random()<0.09?2:1:0});
+    }
+    
+    let arrValue = new Map();
+    let arrResult = new Map();
+    for (let item in data){
+      if(arrValue.has(data[item].round)){
+        arrValue.set(data[item].round, data[item].value+arrValue.get(data[item].round));
+        arrResult.set(data[item].round, data[item].rsesult+arrResult.get(data[item].round));
+      }
+      else{
+        arrValue.set(data[item].round, data[item].value);
+        arrResult.set(data[item].round, data[item].result);
+      }
+    }
+    let art = [];
+    for (let i in arrValue.keys()){
+      art.push({
+        'round':i,
+        'value': arrValue[i],
+        'round': arrResult[i],
+      })
     }
     chart.data = data;
+
 
     // Create axes
     var categoryAxisX = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -53,6 +75,7 @@ class Textbar extends Component{
     var valueAxisY = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxisY.renderer.grid.template.strokeOpacity = 0;
 
+    
     // Second value axis
     var valueAxisY2 = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxisY2.renderer.opposite = true;
@@ -61,14 +84,32 @@ class Textbar extends Component{
     var lineSeries = chart.series.push(new am4charts.LineSeries());
     lineSeries.dataFields.valueY = "total";
     lineSeries.dataFields.categoryX = "round";
-    lineSeries.strokeWidth = 15;
-    lineSeries.stroke = am4core.color("orange");
+    lineSeries.strokeWidth = 5;
+    lineSeries.stroke = am4core.color("#143959");
     lineSeries.yAxis = valueAxisY2;
+    
 
     var lineSeries2 = chart.series.push(new am4charts.ColumnSeries());
     lineSeries2.dataFields.valueY = "value";
     lineSeries2.dataFields.categoryX = "round";
 
+    var lineSeries3 = chart.series.push(new am4charts.LineSeries());
+    lineSeries3.dataFields.valueY = "result";
+    lineSeries3.dataFields.categoryX = "round";
+    lineSeries3.stroke = am4core.color("orange");
+    lineSeries3.strokeWidth = 3;
+    lineSeries3.strokeOpacity = 1;
+    lineSeries3.data = chart.data;
+
+    
+    var gBullet = lineSeries3.bullets.push(new am4charts.CircleBullet());
+    gBullet.circle.fill = am4core.color("orange");
+    gBullet.circle.radius = 5;
+    gBullet.circle.stroke = am4core.color("brown");
+    gBullet.circle.strokeWidth = 1
+    gBullet.circle.opacity = 1;
+    gBullet.circle.strokeOpacity = 0;
+    
     this.chart = chart;
   }
   render(){

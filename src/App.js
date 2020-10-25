@@ -3,7 +3,9 @@ import './App.css';
 import Drops from './dropdown';
 import Textbar from './textbar';
 import Sketch from './sketch';
+import Versus from './versus';
 import axios from 'axios';
+import Profile from './profile';
 
 class App extends Component {
   constructor(props){
@@ -69,6 +71,12 @@ class App extends Component {
     }
     else if (Graph == 1){
       graphs = <Textbar playerIdx = {this.state.Player} data = {this.state.data}/>
+    }
+    else if (Graph == 2){
+      graphs = <Versus playerIdx = {this.state.Player} data = {this.state.data}/>
+    }
+    else if (Graph == 3){
+      graphs = <Profile playerIdx = {this.state.Player}/>
     }
     return (
       <div className="app">

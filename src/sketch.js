@@ -102,7 +102,7 @@ class Sketch extends Component{
       (shot) =>(
         normalize.push({
           positionX : shot.positionX * 0.68,
-          positionY : 50 - Math.abs(50 - shot.positionY),
+          positionY : Math.min(shot.positionY, 100-shot.positionY),
           xG : 15 + shot.xG * 10,
           result : shot.result,
       })
@@ -123,54 +123,9 @@ class Sketch extends Component{
     valueAxisY.renderer.inversed = true;
     valueAxisY.strictMinMax = true; 
     valueAxisY.renderer.grid.template.strokeOpacity = 0;
+   
+
     
-    // Create series
-    var lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.dataFields.valueY = "positionY";
-    lineSeries.dataFields.valueX = "positionX";
-    lineSeries.strokeOpacity = 0;
-    lineSeries.data = normalize.filter(
-      (shot) => (
-        shot.result == 1
-      )
-    );
-    console.log(lineSeries.data);
-
-    // Add a bullet
-    var bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
-    bullet.circle.propertyFields.radius = "xG";
-    bullet.circle.fill = am4core.color("orange");
-    bullet.circle.opacity = 0.5;
-    bullet.circle.horizontalCenter="middle";
-    bullet.circle.verticalCenter="middle";
-
-    // Text bullet
-    var gBullet = lineSeries.bullets.push(new am4charts.LabelBullet());
-    gBullet.label.text = "[bold font-size: 22px]골";
-
-    // Create series2
-    var lineSeries2 = chart.series.push(new am4charts.LineSeries());
-    lineSeries2.dataFields.valueY = "positionY";
-    lineSeries2.dataFields.valueX = "positionX";
-    lineSeries2.strokeOpacity = 0;
-    lineSeries2.data = normalize.filter(
-      (shot) => (
-        shot.result == 0
-      )
-    );
-    console.log(lineSeries2.data)
-    
-    // Add a bullet
-    var bullet2 = lineSeries2.bullets.push(new am4charts.CircleBullet());
-    bullet2.circle.propertyFields.radius = "xG";
-    bullet2.circle.fill = am4core.color("red");
-    bullet2.circle.opacity = 0.5;
-    bullet2.circle.horizontalCenter="middle";
-    bullet2.circle.verticalCenter="middle";
-
-    // Text bullet
-    var nBullet = lineSeries2.bullets.push(new am4charts.LabelBullet());
-    nBullet.label.text = "[bold font-size: 22px]N";
 
     // Draw goal area line 
     var goalAreaSeries = chart.series.push(new am4charts.LineSeries());
@@ -210,6 +165,55 @@ class Sketch extends Component{
     rBullet.circle.radius = 3;
     rBullet.circle.fill = chart.colors.getIndex(1);
     rBullet.circle.stroke = chart.colors.getIndex(1);
+
+    // Create series2
+    var lineSeries2 = chart.series.push(new am4charts.LineSeries());
+    lineSeries2.dataFields.valueY = "positionY";
+    lineSeries2.dataFields.valueX = "positionX";
+    lineSeries2.strokeOpacity = 0;
+    lineSeries2.data = normalize.filter(
+      (shot) => (
+        shot.result == 0
+      )
+    );
+    console.log(lineSeries2.data)
+    
+    // Add a bullet
+    var bullet2 = lineSeries2.bullets.push(new am4charts.CircleBullet());
+    bullet2.circle.propertyFields.radius = "xG";
+    bullet2.circle.fill = am4core.color("red");
+    bullet2.circle.opacity = 0.5;
+    bullet2.circle.horizontalCenter="middle";
+    bullet2.circle.verticalCenter="middle";
+
+    // Text bullet
+    var nBullet = lineSeries2.bullets.push(new am4charts.LabelBullet());
+    nBullet.label.text = "[bold font-size: 22px]N";
+
+ 
+    // Create series
+    var lineSeries = chart.series.push(new am4charts.LineSeries());
+    lineSeries.dataFields.valueY = "positionY";
+    lineSeries.dataFields.valueX = "positionX";
+    lineSeries.strokeOpacity = 0;
+    lineSeries.data = normalize.filter(
+      (shot) => (
+        shot.result == 1
+      )
+    );
+    console.log(lineSeries.data);
+
+    // Add a bullet
+    var bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+    bullet.circle.propertyFields.radius = "xG";
+    bullet.circle.fill = am4core.color("orange");
+    bullet.circle.opacity = 0.8;
+    bullet.circle.horizontalCenter="middle";
+    bullet.circle.verticalCenter="middle";
+
+    // Text bullet
+    var gBullet = lineSeries.bullets.push(new am4charts.LabelBullet());
+    gBullet.label.text = "[bold font-size: 22px]골";
 
     this.chart = chart;
   }
