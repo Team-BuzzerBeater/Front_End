@@ -22,7 +22,7 @@ class Profile extends Component{
     }
 
     componentDidMount() {
-    this.loadingData(this.props.playerIdx);
+        this.loadingData(this.props.playerIdx);
     }
 
     componentDidUpdate(oldProps) {

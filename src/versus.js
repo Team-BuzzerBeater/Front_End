@@ -33,50 +33,27 @@ class Versus extends Component{
     chart.paddingRight = 20;
     chart.background.setFill("white");
 
-    let tmpdata = [{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '울산 현대 호랑이',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '수원 삼성 블루윙스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '대구FC',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },{
-      'enemyTeam': '전북 현대 모터스',
-      'xG': Math.random(),
-    },];
+    let teams = {
+      '1': '전북 현대 모터스',
+      '2': '울산 현대 축구단',
+      '3': 'FC 서울',
+      '4': '포항 스틸러스',
+      '5': '대구FC',
+      '6': '강원FC',
+      '7': '상주 상무 축구단',
+      '8': '수원 삼성 블루윙즈',
+      '9': '성남FC',
+      '10': '인천 유나이티드',
+      '11': '광주FC',
+      '12': '부산 아이파크',
+    };
 
+    let tmpdata = this.props.data.filter(
+      (shots)=>(
+        shots.shootIdx > 33789
+      )
+    );
+     // 33789는 DB의 2019 마지막 데이터 shootidxt
     let arr = new Map();
     for (let item in tmpdata){
       if(arr.has(tmpdata[item].enemyTeam)){
@@ -89,7 +66,7 @@ class Versus extends Component{
     let art = [];
     arr.forEach(function(value,key){
       art.push({
-        'enemyTeam':key,
+        'enemyTeam':teams[key],
         'xG':value,
       });
     })
@@ -115,7 +92,7 @@ class Versus extends Component{
 
   render(){
     return (
-      <div id={"plot"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"20px", width: "70vw", height: "55vw"}}/>
+      <div id={"plot"+this.props.playerIdx} style={{ marginLeft: "15vw", marginRight: "15vw", marginTop:"20px", height: "40vw"}}/>
     )
   }
 }

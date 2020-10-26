@@ -36,43 +36,36 @@ class Textbar extends Component{
 
     
     let data = [];
-    let round = 0, total = 0;
-    for (let i = 1; i <= 38; i++){
-      round = Math.pow(Math.random(),3) +Math.pow(Math.random(),3)+Math.pow(Math.random(),3)+Math.pow(Math.random(),3);
-      total += round;
-      data.push({round: i, value: round, total: total, result: Math.random()<0.3?Math.random()<0.09?2:1:0});
-    }
-    
-    let shootdata  = this.props.data.filter(
+    let round = 0, total = 0, max = 0, min = 9999;
+    let shootdata = this.props.data.filter(
       (shots)=>(
-        shots.shootIdx >33789
+        shots.shootIdx > 33789
       )
-    ); // 33789는 DB의 2019 마지막 데이터 shootidx
-/*
-    let arrValue = {};
-    let arrResult = {};
-    for (let item in data){
-      if(arrValue.has(data[item].round)){
-        arrValue.set(data[item].round, data[item].value+arrValue.get(data[item].round));
-        arrResult.set(data[item].round, data[item].rsesult+arrResult.get(data[item].round));
-      }
-      else{
-        arrValue.set(data[item].round, data[item].value);
-        arrResult.set(data[item].round, data[item].result);
-      }
+    );
+     // 33789는 DB의 2019 마지막 데이터 shootidx
+    for (let item in shootdata){
+      min = Math.min(min,shootdata[item].round);
+      max = Math.max(max,shootdata[item].round);
     }
-    console.log(arrValue);
-    console.log(arrResult);
-    let art = [];
-    for (let i in arrValue.keys()){
-      art.push({
-        'round':i,
-        'value': arrValue[i],
-        'round': arrResult[i],
-      })
+    min = parseInt((min-1)/6);
+    max = parseInt((max-1)/6)+1;
+    for (let i = min; i < max; i++){
+      let roundData = shootdata.filter(
+        (shots) => (
+          parseInt((shots.round-1)/6) == i
+        )
+      );
+      round = i + 1;
+      let value = 0, result = 0;
+      roundData.forEach(
+        element => {
+        value += element.xG;
+        result += element.result;
+      });
+      total += value;
+      data.push({round: round, value: value, total: total, result: result});
     }
-    console.log(art);
-    */
+    console.log(data);
     chart.data = data;
 
     // Create axes
